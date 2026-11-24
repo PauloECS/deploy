@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { SidebarMain } from './_components/sidebar-main'
-export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Dashboard',
 }
