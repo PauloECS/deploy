@@ -31,22 +31,26 @@ export function DialogCreateCategory({ children }: DialogCreateCategoryProps) {
   }, [open])
 
   const submit = async (form: FormData) => {
-    const newForm = await filterFormData(form)
-
-    const { error } = await JSON.parse(await createCategory(newForm))
-
-    if (error) {
-      setError(error)
-      toast({
-        title: 'Não foi possível criar a categoria!',
-      })
-    } else {
+      const newForm = await filterFormData(form)
+      const response = await createCategory(newForm)
+  
+      if (response) {
+        const { error } = JSON.parse(response)
+  
+        if (error) {
+          setError(error)
+          toast({
+            title: 'Não foi possível criar a categoria!',
+          })
+          return
+        }
+      }
+  
       toast({
         title: 'Categoria criada com sucesso!',
       })
       setOpen(false)
     }
-  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
